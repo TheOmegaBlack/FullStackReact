@@ -1,0 +1,17 @@
+{
+  "name": "react-redux-fullstack",
+  "version": "0.0.1",
+  "description": "A full-stack app with the MERN stack",
+  "main": "index.js",
+  "engines": {
+    "node": "8.9.4",
+    "npm": "5.8.0"
+    },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
