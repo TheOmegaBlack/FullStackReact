@@ -1,7 +1,9 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
+const mongoose = require('mongoose')
 const keys = require('../config/keys')
 
+const User = mongoose.model('users')
 
 passport.use(
   new GoogleStrategy({
@@ -11,11 +13,16 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       // accesstoken: allows us to reach back to google and confirm we are authorized
-      console.log('access token:', accessToken)
       // refreshtoken allows us to refresh the token and be re-authorized
-      console.log('refresh token:', refreshToken)
       // all the info we need
-      console.log('profile:', profile)
+      User.findOne({ googleId: profile.id })
+        .then((existingUser) => {
+          if(existingUser) {
+            // Do something
+          } else {
+            new User({ googleId: profile.id }).save();
+          }
+        })
     }
   )
 )
