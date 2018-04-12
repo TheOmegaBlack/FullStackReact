@@ -5,6 +5,23 @@ const keys = require('../config/keys')
 
 const User = mongoose.model('users')
 
+// Used to get the mongo user details from the authentication
+// Useful in case we have more ways to sign in (google, fb, email etc)
+
+// Gets the user id from the user
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+})
+
+// Gets the user from the id
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .then(user => {
+      done(null, user);
+    })
+})
+
+
 passport.use(
   new GoogleStrategy({
       clientID: keys.googleClientID,
@@ -18,9 +35,13 @@ passport.use(
       User.findOne({ googleId: profile.id })
         .then((existingUser) => {
           if(existingUser) {
+            done(null, existingUser);
             // Do something
           } else {
-            new User({ googleId: profile.id }).save();
+            new User({ googleId: profile.id })
+              .save()
+              .then(user => done(null, user));
+            done()
           }
         })
     }
