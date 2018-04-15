@@ -17,7 +17,7 @@
   },
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "nvm index.js"
+    "start": "node index.js"
   },
   "devDependencies": {
     "nodemon": "^1.17.3"
