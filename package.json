@@ -9,17 +9,23 @@
   },
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
+    "concurrently": "^3.5.1",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.3",
     "mongoose": "^5.0.12",
     "passport": "^0.4.0",
-    "passport-google-oauth20": "^1.0.0"
+    "passport-google-oauth20": "^1.0.0",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "yarn --cwd client start",
+    "dev": "concurrently 'yarn server' 'yarn client'"
   },
   "devDependencies": {
-    "nodemon": "^1.17.3"
+    "nodemon": "^1.17.3",
+    "prettier": "1.12.1"
   }
 }

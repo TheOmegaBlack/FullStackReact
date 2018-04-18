@@ -28,22 +28,18 @@ passport.use(
       callbackURL: '/auth/google/callback',
       proxy: true,
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       // accesstoken: allows us to reach back to google and confirm we are authorized
       // refreshtoken allows us to refresh the token and be re-authorized
       // all the info we need
-      User.findOne({ googleId: profile.id })
-        .then((existingUser) => {
-          if(existingUser) {
-            done(null, existingUser);
-            // Do something
-          } else {
-            new User({ googleId: profile.id })
-              .save()
-              .then(user => done(null, user));
-            done()
-          }
-        })
+      const existingUser = await User.findOne({ googleId: profile.id })
+      if(existingUser) {
+        done(null, existingUser);
+        // Do something
+      } else {
+        const user = await new User({ googleId: profile.id })
+        done(null, user)
+      }
     }
   )
 )
