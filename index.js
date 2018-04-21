@@ -6,8 +6,8 @@ const keys = require("./config/keys");
 require("./models/User");
 require("./services/passport");
 
-// const uri = keys.mongoURI;
-const uri = "mongodb://localhost/react_full_stack";
+const uri = keys.mongoURI;
+// const uri = "mongodb://localhost/react_full_stack";
 
 mongoose.connect(uri);
 
