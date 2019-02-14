@@ -16,13 +16,12 @@
     "mongoose": "^5.0.12",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
-    "react-stripe-checkout": "^2.6.3",
-    "redux-thunk": "^2.2.0"
+    "react-stripe-checkout": "^2.6.3"
   },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "client": "yarn --cwd client start",
+    "client": "cd client && yarn start",
     "dev": "concurrently 'yarn server' 'yarn client'"
   },
   "devDependencies": {
