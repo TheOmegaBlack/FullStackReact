@@ -11,7 +11,7 @@ const User = mongoose.model('users')
 // Gets the user id from the user
 passport.serializeUser((user, done) => {
   done(null, user.id);
-})
+});
 
 // Gets the user from the id
 passport.deserializeUser((id, done) => {
@@ -19,25 +19,27 @@ passport.deserializeUser((id, done) => {
     .then(user => {
       done(null, user);
     })
-})
+});
 
 passport.use(
   new GoogleStrategy({
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
       callbackURL: '/auth/google/callback',
+      prompt: 'consent',
       proxy: true,
+      accessType: 'offline',
     },
     async (accessToken, refreshToken, profile, done) => {
       // accesstoken: allows us to reach back to google and confirm we are authorized
       // refreshtoken allows us to refresh the token and be re-authorized
       // all the info we need
-      const existingUser = await User.findOne({ googleId: profile.id })
+      const existingUser = await User.findOne({ googleId: profile.id });
       if(existingUser) {
         done(null, existingUser);
         // Do something
       } else {
-        const user = await new User({ googleId: profile.id })
+        const user = await new User({ googleId: profile.id }).save();
         done(null, user)
       }
     }
