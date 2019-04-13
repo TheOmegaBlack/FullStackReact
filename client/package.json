@@ -1,6 +1,11 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "engines": {
+    "node": "8.12.0",
+    "npm": "6.4.1",
+    "yarn": "1.x"
+  },
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
