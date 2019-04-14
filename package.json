@@ -15,10 +15,13 @@
     "concurrently": "^3.5.1",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.3",
+    "lodash": "^4.17.11",
     "mongoose": "^5.0.12",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
+    "path-parser": "^4.2.0",
     "react-stripe-checkout": "^2.6.3",
+    "sendgrid": "^5.2.3",
     "stripe": "^6.28.0"
   },
   "scripts": {
@@ -26,7 +29,8 @@
     "server": "nodemon index.js",
     "client": "cd client && yarn start",
     "dev": "concurrently 'yarn server' 'yarn client'",
-    "heroku-postbuild": "YARN_PRODUCTION=true cd client && yarn && yarn build"
+    "heroku-postbuild": "YARN_PRODUCTION=true cd client && yarn && yarn build",
+    "webhook": "ssh -R theomegablack.serveo.net:80:localhost:5000 serveo.net"
   },
   "devDependencies": {
     "nodemon": "^1.17.3",
